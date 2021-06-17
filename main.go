@@ -24,7 +24,7 @@ func main() {
 	// read data from csv
 	consoleReader := bufio.NewReader(os.Stdin)
 	r := csv.NewReader(csvfile)
-	var nbResOk = 0 // contains how much responses are correct
+	var nbResOk, nbQuestions = 0, 0 // contains how much responses are correct
 
 	for {
 		rec, err := r.Read()
@@ -36,6 +36,7 @@ func main() {
 			//fmt.Println(err)
 		}
 
+		nbQuestions += 1
 		fmt.Print("What is ", strings.TrimSpace(rec[0]), " ?: ")
 		ans, err := consoleReader.ReadString('\n')
 		if err != nil {
@@ -47,6 +48,6 @@ func main() {
 		}
 	}
 
-	fmt.Println("Nb responses ok are : ", nbResOk)
+	fmt.Println("Result: ", nbResOk, " good responses out of ", nbQuestions)
 
 }
